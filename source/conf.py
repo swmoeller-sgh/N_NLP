@@ -33,6 +33,7 @@ sys.path.append(os.path.abspath("./_ext"))
 extensions = ["sphinx.ext.autodoc", 'sphinx.ext.coverage', 'sphinx.ext.napoleon', "sphinx.ext.todo", "sphinx_rtd_theme"]
 
 todo_include_todos = True
+autoclass_content = 'both'
 
 
 templates_path = ['_templates']

@@ -41,15 +41,57 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">Welcome to Neural language processing (NLP)’s documentation!</a></li>
 <li><a class="reference internal" href="#module-05_sphinx_test.20221022_test">Test file for sphinx</a><ul>
-<li><a class="reference internal" href="#purpose">Purpose</a><ul>
-<li><a class="reference internal" href="#the-transformer-concept">1. The transformer concept</a><ul>
-<li><a class="reference internal" href="#used-functions">Used functions</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#used-classes-and-functions">Used classes and functions</a></li>
 <li><a class="reference internal" href="#sphinx_test.20221022_test.printing"><code class="docutils literal notranslate"><span class="pre">printing()</span></code></a></li>
 <li><a class="reference internal" href="#sphinx_test.20221022_test.printing1"><code class="docutils literal notranslate"><span class="pre">printing1()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-10_annotated_bert.20221022_transformer_bert">The Annotated Transformer</a><ul>
+<li><a class="reference internal" href="#id1">Purpose</a><ul>
+<li><a class="reference internal" href="#the-transformer-concept">1. The transformer concept</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">Used classes and functions</a></li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.Decoder"><code class="docutils literal notranslate"><span class="pre">Decoder</span></code></a><ul>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.Decoder.forward"><code class="docutils literal notranslate"><span class="pre">Decoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.DecoderLayer"><code class="docutils literal notranslate"><span class="pre">DecoderLayer</span></code></a><ul>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.DecoderLayer.forward"><code class="docutils literal notranslate"><span class="pre">DecoderLayer.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.DummyOptimizer"><code class="docutils literal notranslate"><span class="pre">DummyOptimizer</span></code></a><ul>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.DummyOptimizer.step"><code class="docutils literal notranslate"><span class="pre">DummyOptimizer.step()</span></code></a></li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.DummyOptimizer.zero_grad"><code class="docutils literal notranslate"><span class="pre">DummyOptimizer.zero_grad()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.Encoder"><code class="docutils literal notranslate"><span class="pre">Encoder</span></code></a><ul>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.Encoder.forward"><code class="docutils literal notranslate"><span class="pre">Encoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.EncoderDecoder"><code class="docutils literal notranslate"><span class="pre">EncoderDecoder</span></code></a><ul>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.EncoderDecoder.forward"><code class="docutils literal notranslate"><span class="pre">EncoderDecoder.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.EncoderLayer"><code class="docutils literal notranslate"><span class="pre">EncoderLayer</span></code></a><ul>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.EncoderLayer.forward"><code class="docutils literal notranslate"><span class="pre">EncoderLayer.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.Generator"><code class="docutils literal notranslate"><span class="pre">Generator</span></code></a><ul>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.Generator.forward"><code class="docutils literal notranslate"><span class="pre">Generator.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.LayerNorm"><code class="docutils literal notranslate"><span class="pre">LayerNorm</span></code></a><ul>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.LayerNorm.forward"><code class="docutils literal notranslate"><span class="pre">LayerNorm.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.SublayerConnection"><code class="docutils literal notranslate"><span class="pre">SublayerConnection</span></code></a><ul>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.SublayerConnection.forward"><code class="docutils literal notranslate"><span class="pre">SublayerConnection.forward()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.clones"><code class="docutils literal notranslate"><span class="pre">clones()</span></code></a></li>
+<li><a class="reference internal" href="#annotated_bert.20221022_transformer_bert.subsequent_mask"><code class="docutils literal notranslate"><span class="pre">subsequent_mask()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#next-chapter">Next chapter</a></li>
@@ -82,47 +124,37 @@
            <div itemprop="articleBody">
              
   <section id="welcome-to-neural-language-processing-nlp-s-documentation">
-<h1><a class="toc-backref" href="#id1">Welcome to Neural language processing (NLP)’s documentation!</a><a class="headerlink" href="#welcome-to-neural-language-processing-nlp-s-documentation" title="Permalink to this heading"></a></h1>
+<h1><a class="toc-backref" href="#id3">Welcome to Neural language processing (NLP)’s documentation!</a><a class="headerlink" href="#welcome-to-neural-language-processing-nlp-s-documentation" title="Permalink to this heading"></a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#welcome-to-neural-language-processing-nlp-s-documentation" id="id1">Welcome to Neural language processing (NLP)’s documentation!</a></p></li>
-<li><p><a class="reference internal" href="#module-05_sphinx_test.20221022_test" id="id2">Test file for sphinx</a></p></li>
-<li><p><a class="reference internal" href="#next-chapter" id="id3">Next chapter</a></p></li>
-<li><p><a class="reference internal" href="#list-of-open-topics" id="id4">List of open topics</a></p></li>
-<li><p><a class="reference internal" href="#indices-and-tables" id="id5">Indices and tables</a></p></li>
+<li><p><a class="reference internal" href="#welcome-to-neural-language-processing-nlp-s-documentation" id="id3">Welcome to Neural language processing (NLP)’s documentation!</a></p></li>
+<li><p><a class="reference internal" href="#module-05_sphinx_test.20221022_test" id="id4">Test file for sphinx</a></p>
+<ul>
+<li><p><a class="reference internal" href="#purpose" id="id5">Purpose</a></p></li>
+<li><p><a class="reference internal" href="#used-classes-and-functions" id="id6">Used classes and functions</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#module-10_annotated_bert.20221022_transformer_bert" id="id7">The Annotated Transformer</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id8">Purpose</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id9">Used classes and functions</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#next-chapter" id="id10">Next chapter</a></p></li>
+<li><p><a class="reference internal" href="#list-of-open-topics" id="id11">List of open topics</a></p></li>
+<li><p><a class="reference internal" href="#indices-and-tables" id="id12">Indices and tables</a></p></li>
 </ul>
 </div>
 </section>
 <section id="module-05_sphinx_test.20221022_test">
-<span id="test-file-for-sphinx"></span><h1><a class="toc-backref" href="#id2">Test file for sphinx</a><a class="headerlink" href="#module-05_sphinx_test.20221022_test" title="Permalink to this heading"></a></h1>
+<span id="test-file-for-sphinx"></span><h1><a class="toc-backref" href="#id4">Test file for sphinx</a><a class="headerlink" href="#module-05_sphinx_test.20221022_test" title="Permalink to this heading"></a></h1>
 <section id="purpose">
-<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this heading"></a></h2>
-<p>BERT stands for “Bidirectional Encoder Representation with Transformers”. To put it in simple words BERT extracts
-patterns or representations from the data or word embeddings by passing it through an encoder. The encoder itself is
-a transformer architecture that is stacked together. It is a bidirectional transformer which means that during
-training it considers the context from both left and right of the vocabulary to extract patterns or representations.</p>
-<p>BERT (Bidirectional Encoder Representation with Transformers) that achieved state-of-the-art performance in tasks
-like Question-Answering, Natural Language Inference, Classification, and General language understanding evaluation
-or (GLUE).</p>
-<p>BERT accepts 1 or 2 sentences as input, not more!</p>
-<p>– input: 1-2 sentences as input only: <a class="reference external" href="https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/#2-input">https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/#2-input</a>
--formatting</p>
-<p>The entire program is broken down into 4 sections:</p>
-<p>– Preprocessing</p>
-<p>– Building model</p>
-<p>– Loss and Optimization</p>
-<p>– Training</p>
-<section id="the-transformer-concept">
-<h3>1. The transformer concept<a class="headerlink" href="#the-transformer-concept" title="Permalink to this heading"></a></h3>
-<p>– source: <a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">https://jalammar.github.io/illustrated-transformer/</a></p>
-<p class="rubric">References</p>
-<p>The following references were taken:</p>
-<p>– Main tutorial: <a class="reference external" href="https://neptune.ai/blog/how-to-code-bert-using-pytorch-tutorial">https://neptune.ai/blog/how-to-code-bert-using-pytorch-tutorial</a></p>
-<section id="used-functions">
-<h4>Used functions<a class="headerlink" href="#used-functions" title="Permalink to this heading"></a></h4>
+<h2><a class="toc-backref" href="#id5">Purpose</a><a class="headerlink" href="#purpose" title="Permalink to this heading"></a></h2>
+<p>Some initial test for sphinx</p>
 </section>
-</section>
+<section id="used-classes-and-functions">
+<h2><a class="toc-backref" href="#id6">Used classes and functions</a><a class="headerlink" href="#used-classes-and-functions" title="Permalink to this heading"></a></h2>
 </section>
 <dl class="py function">
 <dt class="sig sig-object py" id="sphinx_test.20221022_test.printing">
@@ -165,8 +197,240 @@ or (GLUE).</p>
 <div class="line"><br /></div>
 </div>
 </section>
+<section id="module-10_annotated_bert.20221022_transformer_bert">
+<span id="the-annotated-transformer"></span><h1><a class="toc-backref" href="#id7">The Annotated Transformer</a><a class="headerlink" href="#module-10_annotated_bert.20221022_transformer_bert" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2><a class="toc-backref" href="#id8">Purpose</a><a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>BERT stands for “Bidirectional Encoder Representation with Transformers”. To put it in simple words BERT extracts
+patterns or representations from the data or word embeddings by passing it through an encoder. The encoder itself is
+a transformer architecture that is stacked together. It is a bidirectional transformer which means that during
+training it considers the context from both left and right of the vocabulary to extract patterns or representations.</p>
+<p>BERT (Bidirectional Encoder Representation with Transformers) that achieved state-of-the-art performance in tasks
+like Question-Answering, Natural Language Inference, Classification, and General language understanding evaluation
+or (GLUE).</p>
+<p>BERT accepts 1 or 2 sentences as input, not more!</p>
+<p>– input: 1-2 sentences as input only: <a class="reference external" href="https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/#2-input">https://mccormickml.com/2019/05/14/BERT-word-embeddings-tutorial/#2-input</a>
+-formatting</p>
+<p>The entire program is broken down into 4 sections:</p>
+<p>– Preprocessing</p>
+<p>– Building model</p>
+<p>– Loss and Optimization</p>
+<p>– Training</p>
+<section id="the-transformer-concept">
+<h3>1. The transformer concept<a class="headerlink" href="#the-transformer-concept" title="Permalink to this heading"></a></h3>
+<p>– source: <a class="reference external" href="https://jalammar.github.io/illustrated-transformer/">https://jalammar.github.io/illustrated-transformer/</a></p>
+<p class="rubric">References</p>
+<p>The following references were taken:</p>
+<p>– Main tutorial: <a class="reference external" href="https://neptune.ai/blog/how-to-code-bert-using-pytorch-tutorial">https://neptune.ai/blog/how-to-code-bert-using-pytorch-tutorial</a></p>
+</section>
+</section>
+<section id="id2">
+<h2><a class="toc-backref" href="#id9">Used classes and functions</a><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.Decoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">Decoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.Decoder" title="Permalink to this definition"></a></dt>
+<dd><p>Generic N layer decoder with masking.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.Decoder.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt_mask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.Decoder.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.DecoderLayer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">DecoderLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_attn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_attn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feed_forward</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.DecoderLayer" title="Permalink to this definition"></a></dt>
+<dd><p>Decoder is made of self-attn, src-attn, and feed forward (defined below)”</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.DecoderLayer.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">memory</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt_mask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.DecoderLayer.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Follow Figure 1 (right) for connections.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.DummyOptimizer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">DummyOptimizer</span></span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.DummyOptimizer" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.DummyOptimizer.step">
+<span class="sig-name descname"><span class="pre">step</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.DummyOptimizer.step" title="Permalink to this definition"></a></dt>
+<dd><p>Performs a single optimization step (parameter update).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>closure</strong> (<em>callable</em>) – A closure that reevaluates the model and
+returns the loss. Optional for most optimizers.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Unless otherwise specified, this function should not modify the
+<code class="docutils literal notranslate"><span class="pre">.grad</span></code> field of the parameters.</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.DummyOptimizer.zero_grad">
+<span class="sig-name descname"><span class="pre">zero_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">set_to_none</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.DummyOptimizer.zero_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Sets the gradients of all optimized <code class="xref py py-class docutils literal notranslate"><span class="pre">torch.Tensor</span></code> s to zero.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>set_to_none</strong> (<em>bool</em>) – instead of setting to zero, set the grads to None.
+This will in general have lower memory footprint, and can modestly improve performance.
+However, it changes certain behaviors. For example:
+1. When the user tries to access a gradient and perform manual ops on it,
+a None attribute or a Tensor full of 0s will behave differently.
+2. If the user requests <code class="docutils literal notranslate"><span class="pre">zero_grad(set_to_none=True)</span></code> followed by a backward pass, <code class="docutils literal notranslate"><span class="pre">.grad</span></code>s
+are guaranteed to be None for params that did not receive a gradient.
+3. <code class="docutils literal notranslate"><span class="pre">torch.optim</span></code> optimizers have a different behavior if the gradient is 0 or None
+(in one case it does the step with a gradient of 0 and in the other it skips
+the step altogether).</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.Encoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">Encoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layer</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.Encoder" title="Permalink to this definition"></a></dt>
+<dd><p>Core encoder is a stack of N layers</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.Encoder.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.Encoder.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Pass the input (and mask) through each layer in turn.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.EncoderDecoder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">EncoderDecoder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">encoder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">decoder</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_embed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt_embed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">generator</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.EncoderDecoder" title="Permalink to this definition"></a></dt>
+<dd><p>A standard Encoder-Decoder architecture. Base for this and many
+other models.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.EncoderDecoder.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">src</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">src_mask</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tgt_mask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.EncoderDecoder.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Take in and process masked src and target sequences.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.EncoderLayer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">EncoderLayer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">self_attn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feed_forward</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.EncoderLayer" title="Permalink to this definition"></a></dt>
+<dd><p>Encoder is made up of self-attn and feed forward (defined below)</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.EncoderLayer.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mask</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.EncoderLayer.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Follow Figure 1 (left) for connections.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.Generator">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">Generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">d_model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vocab</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.Generator" title="Permalink to this definition"></a></dt>
+<dd><p>Define standard linear + softmax generation step.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.Generator.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.Generator.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.LayerNorm">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">LayerNorm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">features</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">eps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-06</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.LayerNorm" title="Permalink to this definition"></a></dt>
+<dd><p>Construct a layernorm module (See citation for details).</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.LayerNorm.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.LayerNorm.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Defines the computation performed at every call.</p>
+<p>Should be overridden by all subclasses.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the recipe for forward pass needs to be defined within
+this function, one should call the <code class="xref py py-class docutils literal notranslate"><span class="pre">Module</span></code> instance afterwards
+instead of this since the former takes care of running the
+registered hooks while the latter silently ignores them.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.SublayerConnection">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">SublayerConnection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dropout</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.SublayerConnection" title="Permalink to this definition"></a></dt>
+<dd><p>A residual connection followed by a layer norm.
+Note for code simplicity the norm is first as opposed to last.</p>
+<p>Initializes internal Module state, shared by both nn.Module and ScriptModule.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.SublayerConnection.forward">
+<span class="sig-name descname"><span class="pre">forward</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sublayer</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.SublayerConnection.forward" title="Permalink to this definition"></a></dt>
+<dd><p>Apply residual connection to any sublayer with the same size.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.clones">
+<span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">clones</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">module</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">N</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.clones" title="Permalink to this definition"></a></dt>
+<dd><p>Produce N identical layers.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>module</strong> – </p></li>
+<li><p><strong>N</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="annotated_bert.20221022_transformer_bert.subsequent_mask">
+<span class="sig-prename descclassname"><span class="pre">10_annotated_bert.20221022_transformer_bert.</span></span><span class="sig-name descname"><span class="pre">subsequent_mask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">size</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#annotated_bert.20221022_transformer_bert.subsequent_mask" title="Permalink to this definition"></a></dt>
+<dd><p>Mask out subsequent positions.</p>
+</dd></dl>
+
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
 <section id="next-chapter">
-<h1><a class="toc-backref" href="#id3">Next chapter</a><a class="headerlink" href="#next-chapter" title="Permalink to this heading"></a></h1>
+<h1><a class="toc-backref" href="#id10">Next chapter</a><a class="headerlink" href="#next-chapter" title="Permalink to this heading"></a></h1>
 <div class="toctree-wrapper compound">
 </div>
 <div class="line-block">
@@ -174,13 +438,13 @@ or (GLUE).</p>
 </div>
 </section>
 <section id="list-of-open-topics">
-<h1><a class="toc-backref" href="#id4">List of open topics</a><a class="headerlink" href="#list-of-open-topics" title="Permalink to this heading"></a></h1>
+<h1><a class="toc-backref" href="#id11">List of open topics</a><a class="headerlink" href="#list-of-open-topics" title="Permalink to this heading"></a></h1>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
 <section id="indices-and-tables">
-<h1><a class="toc-backref" href="#id5">Indices and tables</a><a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<h1><a class="toc-backref" href="#id12">Indices and tables</a><a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
 <ul class="simple">
 <li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 <li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>

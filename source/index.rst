@@ -6,11 +6,19 @@
 Welcome to Neural language processing (NLP)'s documentation!
 ============================================================
 .. contents::
-   :depth: 1
+   :depth: 2
 
 Test file for sphinx
 =====================
 .. automodule:: 05_sphinx_test.20221022_test
+    :members:
+
+|
+
+
+The Annotated Transformer
+=========================
+.. automodule:: 10_annotated_bert.20221022_transformer_bert
     :members:
 
 |
@@ -24,6 +32,7 @@ Next chapter
    :caption: Contents:
 
 |
+
 
 List of open topics
 =====================
