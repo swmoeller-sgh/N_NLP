@@ -5,44 +5,43 @@
 
 Welcome to Neural language processing (NLP)'s documentation!
 ============================================================
-.. contents::
-   :depth: 2
-
-Test file for sphinx
-=====================
-.. automodule:: 05_sphinx_test.20221022_test
-    :members:
-
-|
-
-
-The Annotated Transformer
-=========================
-.. automodule:: 10_annotated_bert.20221022_transformer_bert
-    :members:
-
-|
-
-
-Next chapter
-=====================
-
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   annotated_transformer
+   test_file
+   :caption: Table of content
+   :maxdepth: 1
+
+
+
+
+.. The Annotated Transformer (own)
+.. ===============================
+.. .. automodule:: 10_annotated_bert.20221022_transformer_bert
+.. .. :members:
+
+|
+
+
+.. The annotated transformer (original)
+.. .. =====================================
+..
+.. .. automodule:: 10_annotated_bert.the_annotated_transformer
+.. ..    :members:
+
+
 
 |
 
 
 List of open topics
-=====================
+---------------------
 
 .. todolist::
 
 |
 
 Indices and tables
-==================
+-------------------
 
 * :ref:`genindex`
 * :ref:`modindex`

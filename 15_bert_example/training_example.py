@@ -1,15 +1,21 @@
 """
-===========
 Purpose
 ===========
 
 Some initial test for sphinx
 
 
+Approach in python file
+-----------------------
+Test eiwe wies fsfs
+fsfs
+f
+fsf
 
-===========
-Approach
-===========
+* ssfsfsf
+    * sfsfs
+    * sfsf
+* sfsf
 
 Generate a list of words from cleaned sentences
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -17,11 +23,7 @@ Removing the punctuations from the sentences and generate a list of unique words
 
 sdsdsdsd
 ^^^^^^^^^
-
-
-============================
-Used classes and functions
-============================
+sdsdll dsdlsdsd dslds
 
 """
 
@@ -51,9 +53,8 @@ deep_report = True
 
 def generate_clean_sentence (in_text: str):
     """
-    Remove punctuation from sentences (such as ".", "!", etc.) and returning two lists: One list of sentences
-    without their punctuations and another list only containing the unique words of the sentences.
-    First generate a list of sentences
+    1) loc_sentences = Generate a list with all sentences from one line, convert to lower case and remove punctuation.
+    2) loc_word_list = One list containing every word of all sentences (without duplication)
     
     :param in_text: One string containing the text to be used for training
     :type in_text: str
@@ -64,24 +65,96 @@ def generate_clean_sentence (in_text: str):
     loc_word_list = list(set(" ".join(loc_sentences).split()))
     return loc_sentences, loc_word_list
 
+def generate_dictionary (IN_word_list: list):
+    """
+    Out of a provided list of unique words, generate two dictionaries, one with word to number and one with number to word relation.
+    
+    [Token] | Purpose
+    
+    * [CLS] The first token is always classification
+    * [SEP] Separates two sentences
+    * [END] End the sentence.
+    * [PAD] Use to truncate the sentence with equal length.
+    * [MASK] Use to create a mask by replacing the original word.
+    
+    :param IN_word_list: List containing single words without punctuation, all in lower case
+    :type IN_word_list: list
+    :return: loc_word_dict, loc_number_dict, loc_vocab_size
+    :rtype: dict, dict, int
+    """
+    
+    loc_word_dict = {'[PAD]': 0, '[CLS]': 1, '[SEP]': 2, '[MASK]': 3}
+    for i, w in enumerate(IN_word_list):
+        # The enumerated object yields pairs containing a count (from start, which defaults to zero) and a value yielded
+        # by the iterable argument. Enumerate is useful for obtaining an indexed list:
+        # (0, seq[0]), (1, seq[1]), (2, seq[2]), ...
+        loc_word_dict[w] = i + 4
+        loc_number_dict = {i: w for i, w in enumerate(loc_word_dict)}
+        loc_vocab_size = len(loc_word_dict)
+    return loc_word_dict, loc_number_dict, loc_vocab_size
+
+  
+
+def convert_sentence_into_tokens(IN_sentences, IN_word_dict):
+    """
+    Take each sentence and transform every word in the sentence in its specific token, i.e. generating a list
+    containing a list of tokens
+    
+    :param IN_sentences:
+    :type IN_sentences:
+    :param IN_word_dict:
+    :type IN_word_dict:
+    :return:
+    :rtype:
+    """
+    loc_token_list = []
+    for sentence in IN_sentences:
+        loc_token_list.append([IN_word_dict[word] for word in sentence.split()])
+    return loc_token_list
 
 
 def make_batch(batch_size: int = 84, max_pred: int = 3, maxlen: int = 23):
+    """
+    Select two random sentences out of the list of tokeneized sentences.
+    
+    1) check the number of sentences and select two random token index (used to select tokenized sentences)
+    2) Using the random index, select two (already as number converted sentences)
+    3) we add special tokens to the sentences
+    4) represent the first sentence and the second sentence as a sequence of "0" and "1"
+    
+    :param batch_size:
+    :type batch_size:
+    :param max_pred:
+    :type max_pred:
+    :param maxlen:
+    :type maxlen:
+    :return:
+    :rtype:
+    """
     batch = []
     positive = negative = 0
     while positive != batch_size / 2 or negative != batch_size / 2:
-        # take two random indices of sentences you have to sample sentence a and sentence b
+        # Select two random sentences out of the list of tokeneized sentences.
+        # The randrange() method returns a randomly selected element from the specified range.
+ 
+        # 1) check the number of sentences and select two random token index (used to select tokenized sentences)
         tokens_a_index, tokens_b_index = randrange(len(sentences)), randrange(len(sentences))
-
+        
+        # 2) Using the random index, select two (already as number converted sentences)
         tokens_a, tokens_b = token_list[tokens_a_index], token_list[tokens_b_index]
-
-        # we add special tokens to the sentences
+        print("\n[INFO] Random token A [{}] and B [{}] were randomly generated and used to derive the sentence A: {} "
+              "and B: {}".format(tokens_a_index,tokens_b_index, tokens_a, tokens_b))
+        
+        # 3) we add special tokens to the sentences
         input_ids = [word_dict['[CLS]']] + tokens_a + [word_dict['[SEP]']] + tokens_b + [word_dict['[SEP]']]
-
+        print("[INFO] Special tokens were added and both sentenced concatenated: ", input_ids)
+    
+        # 4) represent the first sentence and the second sentence as a sequence of "0" and "1"
         segment_ids = [0] * (1 + len(tokens_a) + 1) + [1] * (len(tokens_b) + 1)
-
+        print("[INFO] Segmented sentence was build : ", segment_ids)
+        
         # MASK LM
-        # 15 % of tokens in one sentence are masked. We mask at least one word and at most `max_pred` words.
+        # 5) Mask 15% of tokens in one sentence. We mask at least one word and at most `max_pred` words.
         n_pred = min(max_pred, max(1, int(round(len(input_ids) * 0.15))))
         cand_masked_pos = [i for i, token in enumerate(input_ids) if
                            token != word_dict['[CLS]'] and token != word_dict['[SEP]']]
@@ -117,38 +190,27 @@ def make_batch(batch_size: int = 84, max_pred: int = 3, maxlen: int = 23):
 
 
 if __name__ == "__main__":
+    # Generate a list of sentences and single words out of a string of sentences
     sentences, word_list = generate_clean_sentence(text)
-    print("[INFO] Generated a list of words.")
+    print("[INFO] Generated a list of sentences and single words out of a string with sentences.")
     if deep_report == True:
-        print("[DETAILED LOG] List of sentences cleaned by punctuations.\n", sentences)
+        print("\n[DETAILED LOG] List of sentences cleaned by punctuations.\n", sentences)
         print("\n[DETAILED LOG] List of unique words.\n", word_list)
     
-# Start to generate the word dictionary
-    # Token | Purpose
-    # [CLS] The first token is always classification
-    # [SEP] Separates two sentences
-    # [END] End the sentence.
-    # [PAD] Use to truncate the sentence with equal length.
-    # [MASK] Use to create a mask by replacing the original word.
-
-    word_dict = {'[PAD]': 0, '[CLS]': 1, '[SEP]': 2, '[MASK]': 3}
-    for i, w in enumerate(word_list):
-        # The enumerate object yields pairs containing a count (from start, which defaults to zero) and a value yielded
-        # by the iterable argument.
-        # enumerate is useful for obtaining an indexed list:
-        # (0, seq[0]), (1, seq[1]), (2, seq[2]), ...
-        word_dict[w] = i + 4
-        number_dict = {i: w for i, w in enumerate(word_dict)}
-        vocab_size = len(word_dict)
-
-    # we transform the sentences to token lists
-    token_list = []
-    for sentence in sentences:
-        token_list.append([word_dict[word] for word in sentence.split()])
-        
+    word_dict, number_dict, vocab_size = generate_dictionary(word_list)
+    print("\n[INFO] A word dictionary and number dictionary was generated and the length of the word dictionary "
+          "determined.")
+    if deep_report == True:
+        print("\n[DETAILED LOG] The word dictionary.\n", word_dict)
+        print("\n[DETAILED LOG] The number dictionary.\n", number_dict)
+        print("\n[DETAILED LOG] Length of the word dictionary: ", vocab_size)
     
+    token_list = convert_sentence_into_tokens(sentences, word_dict)
+
+    print("[INFO] Token list generated, i.e. conversion of sentences into numbers: ", token_list)
     maxlen = 23
     batch = make_batch(maxlen=maxlen)
+    
     batchentry = batch[0]
     input_ids = batchentry[0]
     

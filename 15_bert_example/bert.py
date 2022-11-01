@@ -9,12 +9,28 @@ from encoding_layer import EncoderLayer
 
 
 def gelu(x):
+    """
+    Test gelu documentation
+    dasd
+    dsada
+    
+    
+    :param x:
+    :type x:
+    :return:
+    :rtype:
+    """
     return x * 0.5 * (1.0 + torch.erf(x / math.sqrt(2.0)))
 
 
 class BERT(nn.Module):
     def __init__(self, maxlen: int, n_layers: int = 6, d_model: int = 512, vocab_size: int = 30):
         """
+        sddsada
+        adsdsdasds
+        lkklklk
+        llll
+        
         
         Args:
             maxlen: the maximal length of the time series (i.e. the longest sentence in the data)
