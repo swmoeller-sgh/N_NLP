@@ -5,21 +5,7 @@ A fully documented BERT transformer, based on xxx and documented with Sebastian 
 .. contents::
    :depth: 2
 
-Approach
---------
-Test eiwe wies fsfs
-fsfs
-f
-fsf
-
-* ssfsfsf
-    * sfsfs
-    * sfsf
-* sfsf
-
 |
-
-
 
 .. automodule:: 15_bert_example.training_example
     :inherited-members:
